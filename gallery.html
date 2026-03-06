@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Memory Archive | Select Directory</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=JetBrains+Mono&display=swap');
+        body { background-color: #020617; color: #e2e8f0; font-family: sans-serif; }
+        .code-font { font-family: 'JetBrains Mono', monospace; }
+        
+        .folder-card {
+    position: relative;
+    overflow: hidden;
+    background: #0f172a; /* Warna cadangan */
+}
+
+/* Background Image Layer */
+.folder-bg {
+    position: absolute;
+    inset: 0;
+    background-size: cover;
+    background-position: center;
+    opacity: 0.3; /* Foto agak gelap pas normal */
+    filter: grayscale(100%);
+    transition: all 0.6s ease;
+}
+
+.folder-card:hover .folder-bg {
+    opacity: 0.6;
+    filter: grayscale(0%);
+    transform: scale(1.1);
+}
+
+/* Overlay biar teks tetep kebaca */
+.folder-overlay {
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(to top, #020617 20%, transparent 100%);
+}
+    </style>
+</head>
+<body class="min-h-screen flex flex-col items-center justify-center p-6">
+
+    <div class="max-w-4xl w-full text-center mb-16" data-aos="fade-down">
+        <a href="index.html" class="text-blue-500 text-[10px] code-font tracking-[0.3em] mb-4 inline-block hover:text-white transition-colors">← RETURN TO DASHBOARD</a>
+        <h1 class="text-4xl md:text-6xl font-black text-white uppercase tracking-tighter italic">Memory <span class="text-blue-500">Vault.</span></h1>
+        <p class="text-slate-500 text-xs code-font mt-2 uppercase tracking-widest">Select_Target_Directory_To_Access_Visual_Data</p>
+    </div>
+
+    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 w-full max-w-6xl">
+    
+        <a href="gallery-angkatan.html" class="folder-card p-10 rounded-[40px] group text-center border border-white/5" data-aos="zoom-in">
+            <div class="folder-bg" style="background-image: url('memories/postud3.jfif');"></div>
+            <div class="folder-overlay"></div>
+            
+            <div class="relative z-10">
+                <div class="w-16 h-16 bg-blue-500/20 backdrop-blur-md rounded-2xl flex items-center justify-center mx-auto mb-6 border border-blue-500/30 group-hover:bg-blue-600 transition-all">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="w-8 h-8 text-blue-500 group-hover:text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 11H5m14 0a2 2 0 012 2v6a2 2 0 01-2 2H5a2 2 0 01-2-2v-6a2 2 0 012-2m14 0V9a2 2 0 00-2-2M5 11V9a2 2 0 012-2m0 0V5a2 2 0 012-2h6a2 2 0 012 2v2M7 7h10" />
+                    </svg>
+                </div>
+                <h3 class="text-white font-black text-2xl mb-1 tracking-tighter italic">RPL 2024</h3>
+                <p class="text-[9px] code-font text-blue-400 font-bold uppercase tracking-[0.3em]">Global_Archive</p>
+            </div>
+        </a>
+    
+        <a href="gallery-rpl1.html" class="folder-card p-10 rounded-[40px] group text-center border border-white/5" data-aos="zoom-in" data-aos-delay="100">
+            <div class="folder-bg" style="background-image: url('memories/rpl1/hariguru2.jfif');"></div>
+            <div class="folder-overlay"></div>
+            
+            <div class="relative z-10">
+                <div class="w-16 h-16 bg-white/5 backdrop-blur-md rounded-2xl flex items-center justify-center mx-auto mb-6 border border-white/10 group-hover:bg-emerald-600 transition-all">
+                    <span class="text-2xl font-black text-white/50 group-hover:text-white italic">01</span>
+                </div>
+                <h3 class="text-white font-black text-2xl mb-1 tracking-tighter italic">RPL 1</h3>
+                <p class="text-[9px] code-font text-emerald-400 font-bold uppercase tracking-[0.3em]">Class_Directory</p>
+            </div>
+        </a>
+    
+        <a href="gallery-rpl2.html" class="folder-card p-10 rounded-[40px] group text-center border border-white/5" data-aos="zoom-in" data-aos-delay="200">
+            <div class="folder-bg" style="background-image: url('memories/cover-rpl2.jpg');"></div>
+            <div class="folder-overlay"></div>
+            
+            <div class="relative z-10">
+                <div class="w-16 h-16 bg-white/5 backdrop-blur-md rounded-2xl flex items-center justify-center mx-auto mb-6 border border-white/10 group-hover:bg-purple-600 transition-all">
+                    <span class="text-2xl font-black text-white/50 group-hover:text-white italic">02</span>
+                </div>
+                <h3 class="text-white font-black text-2xl mb-1 tracking-tighter italic">RPL 2</h3>
+                <p class="text-[9px] code-font text-purple-400 font-bold uppercase tracking-[0.3em]">Class_Directory</p>
+            </div>
+        </a>
+    
+        <a href="gallery-rpl3.html" class="folder-card p-10 rounded-[40px] group text-center border border-white/5" data-aos="zoom-in" data-aos-delay="300">
+            <div class="folder-bg" style="background-image: url('memories/cover-rpl3.jpg');"></div>
+            <div class="folder-overlay"></div>
+            
+            <div class="relative z-10">
+                <div class="w-16 h-16 bg-white/5 backdrop-blur-md rounded-2xl flex items-center justify-center mx-auto mb-6 border border-white/10 group-hover:bg-amber-600 transition-all">
+                    <span class="text-2xl font-black text-white/50 group-hover:text-white italic">03</span>
+                </div>
+                <h3 class="text-white font-black text-2xl mb-1 tracking-tighter italic">RPL 3</h3>
+                <p class="text-[9px] code-font text-amber-400 font-bold uppercase tracking-[0.3em]">Class_Directory</p>
+            </div>
+        </a>
+        
+        
+    </div>
+    
+    <footer class="mt-20 text-slate-600 code-font text-[8px] uppercase tracking-[0.5em]">
+        Authorized_Access_Only // Section_6
+    </footer>
+
+    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+    <script>AOS.init({ duration: 800 });</script>
+</body>
+</html>

@@ -1,0 +1,198 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>RPL 1 Archive | RPL 2024</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;700;800&family=JetBrains+Mono&display=swap');
+        
+        body { 
+            font-family: 'Plus Jakarta Sans', sans-serif; 
+            background-color: #020617; 
+            color: #e2e8h0; 
+            overflow-x: hidden;
+        }
+
+        .code-font { font-family: 'JetBrains Mono', monospace; }
+
+        /* Masonry Layout */
+        .masonry-grid {
+            column-count: 2;
+            column-gap: 1rem;
+        }
+        @media (min-width: 768px) { .masonry-grid { column-count: 3; column-gap: 1.5rem; } }
+        @media (min-width: 1024px) { .masonry-grid { column-count: 4; } }
+
+        .img-item {
+            break-inside: avoid;
+            margin-bottom: 1rem;
+            position: relative;
+            border-radius: 20px;
+            overflow: hidden;
+            border: 1px solid rgba(255,255,255,0.05);
+            transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+            cursor: pointer;
+        }
+
+        @media (min-width: 768px) { .img-item { margin-bottom: 1.5rem; } }
+
+        .img-item img {
+            width: 100%;
+            filter: grayscale(100%);
+            transition: all 0.6s ease;
+        }
+
+        .img-item:hover img {
+            filter: grayscale(0%);
+            transform: scale(1.05);
+        }
+
+        /* Tombol Kembali Floating */
+        .back-btn {
+            background: rgba(15, 23, 42, 0.7);
+            backdrop-filter: blur(12px);
+            border: 1px solid rgba(255,255,255,0.1);
+        }
+
+        /* Lightbox Custom Animation */
+        #lightbox.active {
+            display: flex;
+            animation: fadeIn 0.3s ease forwards;
+        }
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+    </style>
+</head>
+<body class="pt-24 pb-12">
+
+    <nav class="fixed top-0 left-0 w-full z-[100] px-6 py-4">
+        <div class="container mx-auto flex justify-between items-center">
+            <a href="gallery.html" class="back-btn flex items-center gap-3 px-5 py-2.5 rounded-full hover:border-blue-500/50 transition-all group shadow-lg">
+                <svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4 text-blue-500 group-hover:-translate-x-1 transition-transform" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 19l-7-7m0 0l7-7m-7 7h18" />
+                </svg>
+                <span class="text-[10px] code-font font-black text-white uppercase tracking-widest">Back to Vault</span>
+            </a>
+            
+            <div class="hidden md:block">
+                <span class="text-[9px] code-font text-slate-500 tracking-[0.4em] uppercase">Status: Accessing_Global_Archive_2024</span>
+            </div>
+        </div>
+    </nav>
+
+    <main class="container mx-auto px-6">
+        <div class="mb-12" data-aos="fade-up">
+            <h4 class="code-font text-blue-500 mb-1 tracking-widest text-[10px] font-bold uppercase">./root/rpl_2024</h4>
+            <h1 class="text-4xl md:text-6xl font-black text-white uppercase tracking-tighter italic leading-none">RPL 1 <span class="text-blue-500">Archive.</span></h1>
+            <p class="text-slate-500 text-xs mt-4 max-w-md italic">Kumpulan memori gabungan seluruh siswa RPL Angkatan 2024 yang berhasil diarsipkan.</p>
+        </div>
+
+        <div class="masonry-grid">
+            <div class="img-item group shadow-2xl" data-aos="fade-up" onclick="openLightbox(this)">
+                <img src="memories/rpl1/bukber.jfif" alt="RPL 2024 - Postud 1">
+            </div>
+
+            <div class="img-item group shadow-2xl" data-aos="fade-up" data-aos-delay="100" onclick="openLightbox(this)">
+                <img src="memories/rpl1/bukber2.jfif" alt="RPL 2024 - Postud 2">
+            </div>
+
+            <div class="img-item group shadow-2xl" data-aos="fade-up" data-aos-delay="200" onclick="openLightbox(this)">
+                <img src="memories/rpl1/hariguru.jfif" alt="RPL 2024 - Postud 3">
+            </div>
+
+            <div class="img-item group shadow-2xl" data-aos="fade-up" data-aos-delay="300" onclick="openLightbox(this)">
+                <img src="memories/rpl1/hariguru2.jfif" alt="RPL 2024 - Moment 4">
+            </div>
+
+            <div class="img-item group shadow-2xl" data-aos="fade-up" onclick="openLightbox(this)">
+                <img src="memories/rpl1/hariguru3.jfif" alt="RPL 2024 - Moment 5">
+            </div>
+
+            <div class="img-item group shadow-2xl" data-aos="fade-up" onclick="openLightbox(this)">
+                <img src="memories/rpl1/p5.jfif" alt="RPL 2024 - Moment 5">
+            </div>
+
+             <div class="img-item group shadow-2xl" data-aos="fade-up" onclick="openLightbox(this)">
+                <img src="memories/rpl1/p52.jfif" alt="RPL 2024 - Moment 5">
+             </div>
+             
+                <div class="img-item group shadow-2xl" data-aos="fade-up" onclick="openLightbox(this)">
+                    <img src="memories/rpl1/rndm.jfif" alt="RPL 2024 - Moment 5">
+              </div>
+              
+              <div class="img-item group shadow-2xl" data-aos="fade-up" onclick="openLightbox(this)">
+                <img src="memories/rpl1/rndm2.jfif" alt="RPL 2024 - Moment 5">
+          </div>
+        </div>
+    </main>
+
+    <div id="lightbox" class="fixed inset-0 z-[1000] hidden bg-slate-950/95 backdrop-blur-2xl flex-col items-center justify-center p-4 transition-all duration-300">
+        <button onclick="closeLightbox()" class="absolute top-6 right-6 text-white/50 hover:text-white text-5xl font-light transition-colors z-[1010] p-4">&times;</button>
+        
+        <div class="relative max-w-5xl w-full h-full flex items-center justify-center" onclick="closeLightbox()">
+            <img id="lightbox-img" src="" class="max-w-full max-h-[85vh] object-contain rounded-lg shadow-2xl transform scale-95 transition-transform duration-300 border border-white/10" onclick="event.stopPropagation()">
+        </div>
+
+        <div class="mt-6 text-center">
+            <p id="lightbox-caption" class="code-font text-[10px] text-blue-500 uppercase tracking-[0.4em]"></p>
+            <p class="text-[8px] text-slate-500 mt-2 uppercase tracking-widest">Click anywhere to close</p>
+        </div>
+    </div>
+
+    <footer class="mt-20 py-10 text-center border-t border-white/5">
+        <p class="text-[9px] code-font text-slate-600 tracking-[0.5em] uppercase italic">End_of_Data_Stream // 2024</p>
+    </footer>
+
+    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+    <script>
+        // Inisialisasi Animasi Scroll
+        AOS.init({ duration: 800, once: true });
+
+        const lightbox = document.getElementById('lightbox');
+        const lightboxImg = document.getElementById('lightbox-img');
+        const lightboxCaption = document.getElementById('lightbox-caption');
+
+        // Fungsi Buka Popup
+        function openLightbox(element) {
+            const img = element.querySelector('img');
+            const imgSrc = img.src;
+            const imgAlt = img.alt;
+
+            lightboxImg.src = imgSrc;
+            lightboxCaption.innerText = "Accessing_File: " + imgSrc.split('/').pop();
+
+            lightbox.classList.remove('hidden');
+            lightbox.classList.add('flex');
+            
+            // Animasi Scale Up
+            setTimeout(() => {
+                lightboxImg.style.transform = "scale(1)";
+            }, 10);
+
+            // Matikan scroll body agar tidak goyang
+            document.body.style.overflow = 'hidden';
+        }
+
+        // Fungsi Tutup Popup
+        function closeLightbox() {
+            lightboxImg.style.transform = "scale(0.95)";
+            
+            setTimeout(() => {
+                lightbox.classList.add('hidden');
+                lightbox.classList.remove('flex');
+                document.body.style.overflow = 'auto';
+            }, 200);
+        }
+
+        // Shortcut Keyboard ESC untuk tutup
+        document.addEventListener('keydown', (e) => {
+            if (e.key === "Escape") closeLightbox();
+        });
+    </script>
+</body>
+</html>

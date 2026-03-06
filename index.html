@@ -1,0 +1,325 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>RPL 2024 Archive</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;700;800&family=JetBrains+Mono&display=swap');
+        
+        body { font-family: 'Plus Jakarta Sans', sans-serif; background-color: #020617; color: #e2e8f0; scroll-behavior: smooth; overflow-x: hidden; }
+        .code-font { font-family: 'JetBrains Mono', monospace; }
+        .glass-nav { background: rgba(2, 6, 23, 0.8); backdrop-filter: blur(12px); border-bottom: 1px solid rgba(255,255,255,0.05); }
+        .glass-card { background: rgba(15, 23, 42, 0.7); backdrop-filter: blur(10px); border: 1px solid rgba(255,255,255,0.05); }
+        .gradient-text { background: linear-gradient(to right, #60a5fa, #34d399); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
+        
+        /* Smooth Cross-Fade Animation untuk Siswa */
+        #preview-siswa { transition: opacity 800ms cubic-bezier(0.4, 0, 0.2, 1), transform 800ms cubic-bezier(0.4, 0, 0.2, 1); }
+        .fade-out { opacity: 0; transform: translateY(10px); }
+        .fade-in { opacity: 1; transform: translateY(0); }
+
+        @keyframes float {
+            0%, 100% { transform: translateY(0px) rotate(1deg); }
+            50% { transform: translateY(-20px) rotate(-1deg); }
+        }
+        .float-anim { animation: float 6s ease-in-out infinite; }
+
+        /* Gallery Hover Effect */
+        .gallery-item { position: relative; overflow: hidden; border-radius: 24px; transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1); }
+        .gallery-item img { transition: all 0.7s scale; filter: grayscale(100%); }
+        .gallery-item:hover img { filter: grayscale(0%); scale: 1.1; }
+        .gallery-overlay { position: absolute; inset: 0; background: linear-gradient(to top, rgba(2,6,23,0.8), transparent); opacity: 0; transition: 0.3s; }
+        .gallery-item:hover .gallery-overlay { opacity: 1; }
+    </style>
+</head>
+<body>
+
+    <nav class="fixed w-full z-[100] glass-nav transition-all duration-500 py-4" id="main-nav">
+        <div class="container mx-auto px-6 flex justify-between items-center">
+            <div class="flex items-center gap-3">
+                <img src="SE PUTIH.png" alt="Logo" class="w-10 h-10 rounded-full border-2 border-blue-500 p-1">
+                <span class="text-xl font-extrabold tracking-tighter uppercase">SOFTWARE<span class="text-blue-500">.</span>2024</span>
+            </div>
+            
+            <div class="hidden md:flex gap-10 text-[11px] font-bold uppercase tracking-[0.2em] text-slate-400">
+                <a href="#welcome" class="hover:text-blue-400 transition-all">Welcome</a>
+                <a href="#about" class="hover:text-blue-400 transition-all">About</a>
+                <a href="#gallery" class="hover:text-blue-400 transition-all">Gallery</a>
+                <a href="#informasi" class="hover:text-blue-400 transition-all">Semua Siswa</a>
+            </div>
+
+            <button class="md:hidden text-slate-400" onclick="document.getElementById('mobile-menu').classList.toggle('hidden')">
+                <svg xmlns="http://www.w3.org/2000/svg" class="h-7 w-7" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16m-7 6h7" />
+                </svg>
+            </button>
+        </div>
+        <div id="mobile-menu" class="hidden md:hidden bg-slate-950 p-8 flex flex-col gap-6 text-center text-xs font-bold uppercase tracking-widest">
+            <a href="#welcome" onclick="this.parentElement.classList.add('hidden')">Welcome</a>
+            <a href="#about" onclick="this.parentElement.classList.add('hidden')">About</a>
+            <a href="#gallery" onclick="this.parentElement.classList.add('hidden')">Gallery</a>
+            <a href="#informasi" onclick="this.parentElement.classList.add('hidden')">Semua Siswa</a>
+        </div>
+    </nav>
+
+    <section id="welcome" class="min-h-screen flex items-center justify-center relative overflow-hidden bg-slate-950">
+        <div class="absolute w-[500px] h-[500px] bg-blue-600/10 rounded-full blur-[120px] -top-40 -left-40"></div>
+        <div class="text-center z-10 px-6" data-aos="zoom-out">
+            <h4 class="code-font text-blue-500 mb-6 tracking-[0.4em] uppercase text-[10px] font-black bg-blue-500/10 inline-block px-6 py-2 rounded-full border border-blue-500/20">System Initialized</h4>
+            <h1 class="text-7xl md:text-[9rem] font-black mb-8 tracking-tighter leading-none text-white">HELLO<br><span class="text-blue-500 italic underline decoration-blue-500/20 underline-offset-8">WORLD.</span></h1>
+            <p class="text-slate-400 max-w-xl mx-auto  text-lg ">Welcome To RPL angkatan 2024</p>
+            <p class="text-slate-400 max-w-xl mx-auto mb-12 text-sm md:text-lg">Merekam setiap baris kenangan dan persahabatan angkatan 2024.</p>
+            <a href="#about" class="px-12 py-5 bg-blue-600 rounded-full font-bold text-white shadow-[0_0_40px_rgba(37,99,235,0.3)] hover:scale-105 transition-all inline-block">Explore Archive</a>
+        </div>
+    </section>
+
+    <section id="about" class="py-40 px-6 relative">
+        <div class="container mx-auto grid md:grid-cols-2 gap-24 items-center">
+            <div class="float-anim order-2 md:order-1 relative" data-aos="fade-right">
+                <div class="absolute -inset-4 bg-blue-500/10 blur-3xl rounded-[5px]"></div>
+                <img src="memories/postud3.jfif" 
+                     class="relative rounded-[50px] shadow-2xl border border-white/5 grayscale hover:grayscale-0 transition-all duration-700 object-cover h-[520px] w-full" 
+                     alt="RPL Solidarity">
+                
+                <div class="absolute -bottom-10 -right-10 glass-card p-6 rounded-3xl border border-blue-500/20 hidden md:block" data-aos="fade-up" data-aos-delay="400">
+                    <h5 class="text-white font-black text-xl leading-none mt-1">EST. 2024 - 2027</h5>
+                </div>
+            </div>
+
+            <div class="order-1 md:order-2" data-aos="fade-up">
+                <h2 class="text-4xl md:text-5xl font-extrabold mb-8 tracking-tighter text-white uppercase">
+                    Technical <span class="text-blue-500">Foundation</span> & Collective Growth
+                </h2>
+                <div class="space-y-6 text-slate-400 text-lg leading-relaxed">
+                    <p>
+                        Angkatan <span class="text-white font-bold">RPL 2024</span> terbentuk melalui proses pembelajaran teknis yang intensif. Kolektivitas kami diuji melalui ribuan jam pemecahan masalah (debugging) dan pengembangan sistem yang kompleks.
+                    </p>
+                    <div class="border-l-2 border-blue-500 pl-6 my-8">
+                        <p class="text-white font-medium italic">
+                            "Solidaritas kami bukan sekadar jargon, melainkan mekanisme kerja. Kami mengadopsi prinsip peer-to-peer support: kegagalan sistem satu individu adalah prioritas troubleshooting bersama."
+                        </p>
+                    </div>
+                    <p>
+                        Perjuangan selama tiga tahun ini bukan hanya tentang penguasaan stack teknologi, tetapi tentang membangun jaringan profesional dan persahabatan berbasis integritas.
+                    </p>
+                </div>
+                <div class="flex gap-12 mt-12 border-t border-white/5 pt-8">
+                    <div>
+                        <span id="dev-years" class="block text-2xl font-bold text-white uppercase">0 Years</span>
+                        <span class="text-[10px] code-font tracking-widest text-blue-500 uppercase">Development</span>
+                    </div>
+                    <div>
+                        <span class="block text-2xl font-bold text-white uppercase">100%</span>
+                        <span class="text-[10px] code-font tracking-widest text-blue-500 uppercase">Commit Rate</span>
+                    </div>
+                    <div id="countdown-timer" class="flex gap-3 items-baseline">
+                        <div class="flex flex-col">
+                            <span id="c-days" class="text-2xl font-bold text-amber-500">00</span>
+                            <span class="text-[8px] code-font text-amber-600 uppercase font-bold">Days</span>
+                        </div>
+                        <span class="text-amber-500/50 font-bold">:</span>
+                        <div class="flex flex-col">
+                            <span id="c-hours" class="text-2xl font-bold text-amber-500">00</span>
+                            <span class="text-[8px] code-font text-amber-600 uppercase font-bold">Hrs</span>
+                        </div>
+                        <span class="text-amber-500/50 font-bold">:</span>
+                        <div class="flex flex-col">
+                            <span id="c-mins" class="text-2xl font-bold text-amber-500">00</span>
+                            <span class="text-[8px] code-font text-amber-600 uppercase font-bold">Min</span>
+                        </div>
+                        <span class="text-amber-500/50 font-bold">:</span>
+                        <div class="flex flex-col">
+                            <span id="c-secs" class="text-2xl font-bold text-amber-500 animate-pulse">00</span>
+                            <span class="text-[8px] code-font text-amber-600 uppercase font-bold">Sec</span>
+                        </div>
+                        <span class="text-[10px] code-font tracking-widest text-amber-600/70 uppercase font-black mt-1 block">Time to Graduation</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="gallery" class="py-40 px-6 bg-slate-900/10">
+        <div class="container mx-auto">
+            <div class="flex flex-col md:flex-row justify-between items-end mb-20 gap-6" data-aos="fade-up">
+                <div>
+                    <h4 class="code-font text-blue-500 mb-2 tracking-widest text-xs font-bold uppercase">./visual-memories</h4>
+                    <h2 class="text-5xl font-black text-white uppercase tracking-tighter leading-none">Our <span class="text-blue-500">Memories.</span></h2>
+                </div>
+                <p class="text-slate-500 text-sm max-w-xs text-right hidden md:block italic">"Sebuah gambar mewakili seribu baris kode yang pernah kita tulis bersama."</p>
+            </div>
+
+            <div class="grid grid-cols-2 md:grid-cols-4 gap-6">
+                <div class="gallery-item h-64 md:h-80 shadow-2xl" data-aos="zoom-in">
+                    <img src="memories/postud2.jfif" class="w-full h-full object-cover">
+                    <div class="gallery-overlay flex items-end p-6">
+                        <span class="text-xs font-bold tracking-[0.2em] uppercase">Postud Angkatan</span>
+                    </div>
+                </div>
+                <div class="gallery-item h-80 md:h-[400px] md:-mt-12 shadow-2xl" data-aos="zoom-in" data-aos-delay="100">
+                    <img src="memories/kunjin.jfif" class="w-full h-full object-cover">
+                    <div class="gallery-overlay flex items-end p-6">
+                        <span class="text-xs font-bold tracking-[0.2em] uppercase">Kunjungan Industri</span>
+                    </div>
+                </div>
+                <div class="gallery-item h-64 md:h-96 shadow-2xl" data-aos="zoom-in" data-aos-delay="200">
+                    <img src="memories/agustus.jfif" class="w-full h-full object-cover">
+                    <div class="gallery-overlay flex items-end p-6">
+                        <span class="text-xs font-bold tracking-[0.2em] uppercase">Agustusan</span>
+                    </div>
+                </div>
+                <div class="gallery-item h-80 md:h-[450px] md:-mt-20 shadow-2xl" data-aos="zoom-in" data-aos-delay="300">
+                    <img src="memories/rgts.jfif" class="w-full h-full object-cover">
+                    <div class="gallery-overlay flex items-end p-6">
+                        <span class="text-xs font-bold tracking-[0.2em] uppercase">Rpl Goes To School</span>
+                    </div>
+                </div>
+            </div>
+            <div class="mt-20 flex justify-center" data-aos="fade-up">
+                <a href="gallery.html" class="group relative inline-flex items-center gap-4 px-10 py-4 bg-white/5 border border-white/10 rounded-full overflow-hidden transition-all hover:border-blue-500/50 hover:bg-blue-500/5">
+                    <div class="absolute inset-0 bg-blue-500/10 blur-xl opacity-0 group-hover:opacity-100 transition-opacity"></div>
+                    
+                    <span class="relative text-[10px] font-black uppercase tracking-[0.3em] text-slate-400 group-hover:text-white transition-colors">
+                        Explore Full Gallery
+                    </span>
+                    
+                    <svg xmlns="http://www.w3.org/2000/svg" class="relative w-4 h-4 text-blue-500 transform group-hover:translate-x-2 transition-transform" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8l4 4m0 0l-4 4m4-4H3" />
+                    </svg>
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <section id="informasi" class="py-40 px-6 relative overflow-hidden">
+        <div class="container mx-auto">
+            <div class="text-center mb-24" data-aos="fade-up">
+                <h4 class="code-font text-blue-500 mb-4 tracking-[0.4em] text-[10px] font-black uppercase">Live Archive Refresh</h4>
+                <h2 class="text-5xl md:text-7xl font-black mb-6 uppercase italic text-white tracking-tighter text-center">Spotlight <span class="text-blue-500">STUDENTS</span></h2>
+                <div class="flex items-center justify-center gap-3">
+                    <span class="w-2 h-2 bg-blue-500 rounded-full animate-ping"></span>
+                    <p class="text-slate-500 text-[10px] uppercase font-bold tracking-widest mt-3">
+                        Arsip Perjuangan: <span class="text-white">1.095 Hari</span> Menolak Menyerah pada Error.
+                    </p>
+                </div>
+            </div>
+
+            <div class="min-h-[250px]">
+                <div id="preview-siswa" class="grid grid-cols-1 sm:grid-cols-2 gap-10 max-w-5xl mx-auto mb-20 fade-in">
+                    </div>
+            </div>
+
+            <div class="text-center">
+                <a href="siswa.html" class="px-16 py-6 rounded-2xl bg-slate-900 border border-white/10 text-white font-black uppercase tracking-[0.3em] hover:bg-blue-600 transition-all hover:shadow-[0_0_50px_rgba(37,99,235,0.4)] text-xs inline-block">
+                    Buka Database Lengkap
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <footer class="py-24 text-center border-t border-white/5 bg-slate-950">
+        <img src="SE PUTIH.png" alt="Logo" class="w-12 h-12 mx-auto mb-6 opacity-30">
+        <p class="text-slate-500 text-[10px] code-font tracking-[0.5em]">&copy; 2024 // RPL_ARCHIVE.EXE</p>
+        <p class="text-slate-500 text-[10px] code-font tracking-[0.5em]">dibuat dengan ❤ oleh TIMKREATIFRPL2024</p>
+    </footer>
+
+    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+    <script src="data.js"></script> 
+    <script>
+        AOS.init({ duration: 1000, once: true });
+
+        const container = document.getElementById('preview-siswa');
+
+        function refreshPreview() {
+            if (typeof students === 'undefined' || students.length < 2) return;
+
+            container.classList.remove('fade-in');
+            container.classList.add('fade-out');
+            
+            setTimeout(() => {
+                const shuffled = [...students].sort(() => 0.5 - Math.random());
+                const selected = shuffled.slice(0, 2);
+
+                container.innerHTML = selected.map(s => `
+    <div onclick="openModal(${s.id})" class="group cursor-pointer">
+        <div class="bg-white/5 backdrop-blur-md p-4 rounded-2xl flex items-center gap-4 border border-white/10 shadow-xl transition-all duration-300 hover:bg-white/10 hover:border-blue-500/30 hover:-translate-y-1">
+            
+            <div class="relative shrink-0">
+                <img src="${s.img}" class="w-16 h-16 md:w-20 md:h-20 bg-slate-800 rounded-xl object-cover border border-white/10 shadow-lg grayscale group-hover:grayscale-0 transition-all duration-500">
+                <div class="absolute inset-0 rounded-xl ring-1 ring-inset ring-white/10 group-hover:ring-blue-500/30"></div>
+            </div>
+
+            <div class="text-left overflow-hidden">
+                <p class="text-blue-500 code-font text-[8px] font-black tracking-[0.2em] uppercase mb-0.5">${s.class}</p>
+                <h4 class="text-sm md:text-base font-black text-white truncate group-hover:text-blue-400 transition-colors uppercase tracking-tight">${s.name}</h4>
+                
+                <p class="text-slate-400 text-[10px] italic opacity-70 line-clamp-1 mt-1 group-hover:opacity-100">
+                    "${s.quote}"
+                </p>
+            </div>
+
+            <div class="ml-auto opacity-0 group-hover:opacity-100 transition-opacity">
+                <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 text-blue-500" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M9 5l7 7-7 7" />
+                </svg>
+            </div>
+        </div>
+    </div>
+`).join('');
+                container.classList.remove('fade-out');
+                container.classList.add('fade-in');
+            }, 800); 
+        }
+
+        document.addEventListener('DOMContentLoaded', () => {
+            refreshPreview();
+            setInterval(refreshPreview, 3500); 
+        });
+
+        window.addEventListener('scroll', function() {
+            const nav = document.getElementById('main-nav');
+            window.scrollY > 100 ? nav.classList.add('bg-slate-950/90', 'py-3') : nav.classList.remove('bg-slate-950/90', 'py-3');
+        });
+        function startGraduationCountdown() {
+    const startDate = new Date('2024-07-01').getTime();
+    const graduationDate = new Date('2027-06-20T00:00:00').getTime(); // Sesuaikan tgl lulus
+
+    setInterval(() => {
+        const now = new Date().getTime();
+        
+        // 1. Hitung Development Years (Lama Sekolah)
+        const diffDev = now - startDate;
+        const devYears = (diffDev / (1000 * 60 * 60 * 24 * 365.25)).toFixed(2);
+        document.getElementById('dev-years').innerText = `${devYears} Years`;
+
+        // 2. Hitung Sisa Waktu (Countdown)
+        const distance = graduationDate - now;
+
+        if (distance < 0) {
+            document.getElementById('countdown-timer').innerHTML = "<span class='text-2xl font-bold text-emerald-500'>GRADUATED</span>";
+            return;
+        }
+
+        // Kalkulasi Waktu
+        const days = Math.floor(distance / (1000 * 60 * 60 * 24));
+        const hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+        const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+        const seconds = Math.floor((distance % (1000 * 60)) / 1000);
+
+        // Update ke HTML (tambah angka 0 di depan jika < 10)
+        document.getElementById('c-days').innerText = days;
+        document.getElementById('c-hours').innerText = hours.toString().padStart(2, '0');
+        document.getElementById('c-mins').innerText = minutes.toString().padStart(2, '0');
+        document.getElementById('c-secs').innerText = seconds.toString().padStart(2, '0');
+
+    }, 1000);
+}
+
+// Panggil fungsi
+startGraduationCountdown();
+
+    </script>
+</body>
+</html>

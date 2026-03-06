@@ -1,0 +1,287 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Library | RPL Archive</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;700;800&family=JetBrains+Mono&display=swap');
+        
+        body { 
+            font-family: 'Plus Jakarta Sans', sans-serif; 
+            background-color: #020617; 
+            color: #e2e8f0; 
+            overflow-x: hidden;
+        }
+        
+        .glass-card { 
+            background: rgba(15, 23, 42, 0.6); 
+            backdrop-filter: blur(12px); 
+            border: 1px solid rgba(255,255,255,0.08); 
+        }
+        
+        .glass-nav { 
+            background: rgba(2, 6, 23, 0.85); 
+            backdrop-filter: blur(15px); 
+            border-bottom: 1px solid rgba(255,255,255,0.05); 
+        }
+        
+        .code-font { font-family: 'JetBrains Mono', monospace; }
+
+        /* Custom Scrollbar for better look on mobile */
+        ::-webkit-scrollbar { width: 5px; }
+        ::-webkit-scrollbar-thumb { background: #1e293b; border-radius: 10px; }
+
+        /* Hide Scrollbar for filter on mobile */
+        .no-scrollbar::-webkit-scrollbar { display: none; }
+        .no-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
+    </style>
+</head>
+<body class="bg-[#020617]">
+
+    <main class="container mx-auto px-4 pt-24 pb-12">
+        
+        <div class="mb-10 flex flex-col gap-8">
+            <div data-aos="fade-down">
+                <a href="index.html" class="text-blue-500 text-[10px] font-black uppercase tracking-[0.2em] hover:text-blue-400 flex items-center gap-2 mb-2">
+                    <span>←</span> BACK TO HOME
+                </a>
+                <h1 class="text-4xl md:text-6xl font-black uppercase tracking-tighter leading-none text-white italic">
+                    Perpustakaan <span class="text-blue-500 block md:inline">SISWA</span>
+                </h1>
+            </div>
+            <div class="relative max-w-md" data-aos="fade-up" data-aos-delay="100">
+                <div class="absolute inset-y-0 left-0 pl-4 flex items-center pointer-events-none">
+                    <svg class="h-4 w-4 text-slate-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"></path>
+                    </svg>
+                </div>
+                <input type="text" id="searchInput" oninput="handleSearch()" 
+                    placeholder="Cari nama siswa..." 
+                    class="w-full bg-slate-900/50 border border-white/10 rounded-2xl py-3 pl-12 pr-4 text-sm text-white placeholder:text-slate-600 focus:outline-none focus:border-blue-500/50 focus:ring-1 focus:ring-blue-500/20 transition-all">
+            </div>
+
+            <div class="flex overflow-x-auto no-scrollbar gap-3 pb-2 md:pb-0" data-aos="fade-up">
+                <button onclick="filterSiswa('all', this)" class="filter-btn shrink-0 px-6 py-2.5 rounded-xl bg-blue-600 text-[10px] font-black uppercase tracking-widest text-white shadow-lg shadow-blue-600/20">All</button>
+                <button onclick="filterSiswa('RPL 1', this)" class="filter-btn shrink-0 px-6 py-2.5 rounded-xl glass-card text-[10px] font-black uppercase tracking-widest hover:border-blue-500 transition-all">RPL 1</button>
+                <button onclick="filterSiswa('RPL 2', this)" class="filter-btn shrink-0 px-6 py-2.5 rounded-xl glass-card text-[10px] font-black uppercase tracking-widest hover:border-blue-500 transition-all">RPL 2</button>
+                <button onclick="filterSiswa('RPL 3', this)" class="filter-btn shrink-0 px-6 py-2.5 rounded-xl glass-card text-[10px] font-black uppercase tracking-widest hover:border-blue-500 transition-all">RPL 3</button>
+            </div>
+        </div>
+
+        <div id="student-container" class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 md:gap-8">
+            </div>
+    </main>
+
+    <div id="studentModal" class="fixed inset-0 bg-slate-950/90 z-[1000] hidden items-center justify-center p-4 backdrop-blur-xl transition-all">
+        <div class="glass-card max-w-md w-full rounded-[40px] p-8 md:p-10 relative shadow-2xl overflow-hidden" data-aos="zoom-in" data-aos-duration="300">
+            <div class="absolute top-0 left-0 w-full h-1.5 bg-gradient-to-r from-blue-600 via-purple-500 to-emerald-500"></div>
+            <button onclick="closeModal()" class="absolute top-5 right-6 text-slate-500 hover:text-white text-3xl font-light transition-colors">&times;</button>
+            
+            <div id="modalBody" class="flex flex-col items-center">
+                </div>
+        </div>
+    </div>
+
+    <script src="data.js"></script>
+    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+    <script>
+        AOS.init({ duration: 800, once: true });
+
+        function toggleMenu() {
+            const menu = document.getElementById('mobile-menu');
+            menu.classList.toggle('hidden');
+        }
+
+        function renderSiswa(data) {
+            const container = document.getElementById('student-container');
+            container.innerHTML = '';
+            
+            if (data.length === 0) {
+                container.innerHTML = `<div class="col-span-full py-20 text-center text-slate-500 uppercase font-bold tracking-widest">No data found</div>`;
+                return;
+            }
+
+            data.forEach((s, index) => {
+                container.innerHTML += `
+                    <div class="glass-card p-5 md:p-8 rounded-[32px] text-center group cursor-pointer hover:border-blue-500/50 transition-all duration-500 shadow-xl" 
+                         onclick="openModal(${s.id})" data-aos="fade-up" data-aos-delay="${index % 4 * 50}">
+                        <div class="relative w-20 h-20 md:w-28 md:h-28 mx-auto mb-4 md:mb-6">
+                            <div class="absolute inset-0 bg-blue-500/20 blur-xl rounded-full opacity-0 group-hover:opacity-100 transition-opacity"></div>
+                            <img src="${s.img}" class="relative w-full h-full object-cover bg-slate-800 rounded-full border border-white/10 p-1.5 group-hover:scale-105 transition-transform duration-500">
+                        </div>
+                        <h4 class="text-sm md:text-lg font-black text-white group-hover:text-blue-400 transition-colors truncate px-2 leading-tight">${s.name}</h4>
+                        <p class="text-[9px] code-font text-blue-500/70 mt-1 uppercase tracking-widest font-bold">${s.class}</p>
+                    </div>`;
+            });
+        }
+
+        function filterSiswa(className, btn) {
+            // Update active button UI
+            document.querySelectorAll('.filter-btn').forEach(b => {
+                b.classList.remove('bg-blue-600', 'text-white', 'shadow-blue-600/20');
+                b.classList.add('glass-card');
+            });
+            btn.classList.add('bg-blue-600', 'text-white', 'shadow-blue-600/20');
+            btn.classList.remove('glass-card');
+
+            const filtered = className === 'all' ? students : students.filter(s => s.class === className);
+            renderSiswa(filtered);
+        }
+
+        function openModal(id) {
+            const s = students.find(item => item.id === id);
+            const modal = document.getElementById('studentModal');
+            const modalBody = document.getElementById('modalBody');
+
+            modalBody.innerHTML = `
+    <div class="w-full bg-slate-900/50 rounded-[24px] border border-white/10 overflow-hidden shadow-2xl relative text-left">
+        <div class="absolute top-0 right-0 w-32 h-32 bg-blue-600/10 blur-3xl rounded-full -mr-16 -mt-16"></div>
+        
+        <div class="bg-blue-600/20 px-6 py-3 border-b border-white/5 flex justify-between items-center">
+            <span class="text-[10px] code-font font-black tracking-widest text-blue-400">STUDENT INFORMATION</span>
+            <span class="text-[10px] code-font font-black text-slate-500 italic uppercase">RPL 2024 Archive</span>
+        </div>
+
+        <div class="p-6 md:p-8 flex flex-col md:flex-row gap-8 items-center md:items-start">
+            <div class="relative shrink-0 flex flex-col items-center">
+                <div class="w-32 h-40 md:w-36 md:h-48 bg-slate-800 rounded-xl border-2 border-white/10 overflow-hidden shadow-inner relative">
+                    <img src="${s.img}" class="w-full h-full object-cover grayscale hover:grayscale-0 transition-all duration-500">
+                    <div class="absolute inset-0 pointer-events-none bg-[linear-gradient(rgba(18,16,16,0)_50%,rgba(0,0,0,0.1)_50%),linear-gradient(90deg,rgba(255,0,0,0.03),rgba(0,255,0,0.01),rgba(0,0,255,0.03))] bg-[length:100%_2px,3px_100%]"></div>
+                </div>
+                
+                <div class="mt-3">
+                    <div class="inline-block px-3 py-1 bg-emerald-500/10 border border-emerald-500/20 rounded-full">
+                        <p class="text-[8px] text-emerald-400 font-black uppercase tracking-widest">Active Member</p>
+                    </div>
+                </div>
+
+                <a href="https://instagram.com/${s.ig}" target="_blank" class="mt-4 flex items-center gap-2 px-4 py-2 bg-white/5 border border-white/10 rounded-lg hover:border-pink-500/50 transition-all group w-full justify-center">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="w-3.5 h-3.5 text-slate-400 group-hover:text-pink-500 transition-colors" fill="currentColor" viewBox="0 0 24 24">
+                        <path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"/>
+                    </svg>
+                    <span class="text-[9px] text-slate-400 group-hover:text-white font-bold tracking-widest uppercase transition-colors">@${s.ig}</span>
+                </a>
+                 <a href="https://github.com/${s.github}" target="_blank" class="mt-4 flex items-center gap-2 px-4 py-2 bg-white/5 border border-white/10 rounded-lg hover:border-white/40 hover:bg-white/10 transition-all group w-full justify-center">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4 text-slate-400 group-hover:text-white transition-colors" fill="currentColor" viewBox="0 0 24 24">
+                        <path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"/>
+                    </svg>
+                    <span class="text-[9px] text-slate-400 group-hover:text-white font-bold tracking-[0.2em] uppercase transition-colors italic">${s.github}</span>
+                </a>
+            </div>
+
+            <div class="flex-1 space-y-4 w-full">
+                <div>
+                    <p class="text-[9px] text-slate-500 font-bold uppercase tracking-widest mb-0.5">Full Name</p>
+                    <h3 class="text-l md:text-l font-black text-white leading-tight uppercase tracking-tighter">${s.name}</h3>
+                </div>
+
+                <div class="grid grid-cols-2 gap-4 border-t border-white/5 pt-3">
+                    <div>
+                        <p class="text-[9px] text-slate-500 font-bold uppercase tracking-widest mb-0.5">Date of Birth</p>
+                        <p class="text-white text-xs font-bold uppercase">${s.birthDate}</p>
+                    </div>
+                    <div>
+                        <p class="text-[9px] text-slate-500 font-bold uppercase tracking-widest mb-0.5">Class</p>
+                        <p class="text-blue-400 code-font text-xs font-black italic">${s.class}</p>
+                    </div>
+                </div>
+
+                <div class="pt-1">
+                    <p class="text-[9px] text-emerald-400 font-black uppercase tracking-widest mb-1.5 flex items-center gap-2">
+                        Favorite Track 
+                        <span class="inline-block w-8 h-[1px] bg-emerald-400/30"></span>
+                        <span class="animate-pulse text-[10px]">♫</span>
+                    </p>
+                    <div class="bg-white/5 p-3 rounded-xl border border-white/5 italic">
+                        <p class="text-white text-[11px] font-medium leading-relaxed">${s.favoriteMusic}</p>
+                    </div>
+                </div>
+
+                <div class="space-y-3 pt-1">
+                    <div>
+                        <p class="text-[9px] text-blue-400 font-black uppercase tracking-widest mb-0.5">Mission / Goal</p>
+                        <p class="text-slate-300 text-xs leading-relaxed font-medium">${s.goal}</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="bg-white/5 px-6 py-4 flex justify-between items-center border-t border-white/5 gap-4">
+            <div class="flex-1">
+                <p class="text-[9px] text-slate-500 font-bold uppercase tracking-widest mb-0.5">Core Quote</p>
+                <p class="text-white/60 text-[10px] italic font-medium leading-relaxed truncate md:whitespace-normal">"${s.quote}"</p>
+            </div>
+            
+            <div class="flex flex-col items-end shrink-0">
+                <div class="flex gap-0.5 mb-1">
+                    <div class="w-1 h-5 bg-slate-700"></div>
+                    <div class="w-0.5 h-5 bg-slate-700"></div>
+                    <div class="w-2 h-5 bg-slate-700"></div>
+                    <div class="w-1 h-5 bg-slate-700"></div>
+                    <div class="w-0.5 h-5 bg-slate-700"></div>
+                    <div class="w-1.5 h-5 bg-slate-700"></div>
+                    <div class="w-1 h-5 bg-slate-700"></div>
+                </div>
+                <span class="text-[7px] text-slate-600 code-font uppercase tracking-tighter">ID-ARCHIVE-2024</span>
+            </div>
+        </div>
+    </div>
+`;
+            
+            modal.classList.remove('hidden');
+            modal.classList.add('flex');
+            document.body.style.overflow = 'hidden';
+        }
+
+        function closeModal() {
+            document.getElementById('studentModal').classList.add('hidden');
+            document.getElementById('studentModal').classList.remove('flex');
+            document.body.style.overflow = 'auto';
+        }
+
+        // Close modal on background click
+        window.onclick = function(event) {
+            const modal = document.getElementById('studentModal');
+            if (event.target == modal) closeModal();
+        }
+
+        // Initial Render
+        renderSiswa(students);
+        let currentClass = 'all'; // Menyimpan filter kelas yang sedang aktif
+
+function handleSearch() {
+    const searchTerm = document.getElementById('searchInput').value.toLowerCase();
+    
+    // Filter berdasarkan kelas yang aktif DAN teks pencarian
+    const filtered = students.filter(s => {
+        const matchesClass = currentClass === 'all' || s.class === currentClass;
+        const matchesName = s.name.toLowerCase().includes(searchTerm);
+        return matchesClass && matchesName;
+    });
+
+    renderSiswa(filtered);
+}
+
+function filterSiswa(className, btn) {
+    currentClass = className; // Update status kelas
+    
+    // Reset input pencarian saat pindah kategori (opsional, hapus baris bawah jika ingin search tetap ada)
+    // document.getElementById('searchInput').value = ''; 
+
+    // Update active button UI
+    document.querySelectorAll('.filter-btn').forEach(b => {
+        b.classList.remove('bg-blue-600', 'text-white', 'shadow-blue-600/20');
+        b.classList.add('glass-card');
+    });
+    btn.classList.add('bg-blue-600', 'text-white', 'shadow-blue-600/20');
+    btn.classList.remove('glass-card');
+
+    // Jalankan search ulang agar filter kelas & search tergabung
+    handleSearch(); 
+}
+    </script>
+</body>
+</html>
