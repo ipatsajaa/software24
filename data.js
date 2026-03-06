@@ -4,10 +4,10 @@
             id: 1, 
             name: "Fatahillah Akbar", 
             class: "RPL 1", 
-            quote: "You make me sick , Because I adore you so", 
+            quote: "I Wish I Was Special.", 
             goal: "Designer ", 
             birthDate: "18 Januari 2009",
-            favoriteMusic: "All I Want - The Panturas",
+            favoriteMusic: "Creep - Radiohead",
             ig: "patkepott", 
             github: "Ipatkepot",
             img: "siswa/ipat.jpg" 
