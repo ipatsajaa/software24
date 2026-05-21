@@ -7,7 +7,7 @@
             quote: "I Wish I Was Special.", 
             goal: "Designer ", 
             birthDate: "18 Januari 2009",
-            favoriteMusic: "Creep - Radiohead",
+            favoriteMusic: "You and me against the world - The panturas",
             ig: "patkepott", 
             github: "Ipatkepot",
             img: "siswa/ipat.jpg" 
@@ -84,4 +84,16 @@
             github: "riskaaulias",
             img: "siswa/bais.jfif"
          },     
+         {
+            id: 8,  
+            name: "Salwa Khaerunnisa", 
+            class: "RPL 1", 
+            quote: "Berbagai cobaan dan hal yang buat kau ragu jadikan percikan 'tuk menerpa tekadmu jalan hidupmu hanya milikmu sendiri rasakan nikmatnya hidupmu hari ini", 
+            goal: "sukses jadi orang kaya", 
+            birthDate: "10 februari 2009",
+            favoriteMusic: "Membasuh - Hindia",
+            ig: "athvwa._", 
+            github: "salwakhaerunnisa05",
+            img: "siswa/salwa.jpeg"
+         },
 ];
